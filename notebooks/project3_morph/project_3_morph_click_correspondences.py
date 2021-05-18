@@ -12,8 +12,10 @@ import tkinter as tk
 
 from PIL import Image, ImageTk
 
-img_1 = Image.open('../pics/sample-5.png')
-img_2 = Image.open('../pics/sample-5.png')
+img_1 = Image.open('../pics/Gollum_1.png')
+img_1 = img_1.resize((200, 200), Image.ANTIALIAS)
+img_2 = Image.open('../pics/Gollum_2.png')
+img_2 = img_2.resize((200, 200), Image.ANTIALIAS)
 
 BORDER = 50
 COLOR = 'blue'
@@ -31,12 +33,12 @@ def add_point(event):
     if not next_img:
         # 轮到图片 1
         COLOR = random_color()
-        if event.x < BORDER // 2 or event.x > img_1.size[0] + BORDER // 2 \
-                or event.y < BORDER // 2 or event.y > img_1.size[0] + BORDER // 2:
+        if event.x <= BORDER // 2 or event.x >= img_1.size[0] + BORDER // 2 \
+                or event.y <= BORDER // 2 or event.y >= img_1.size[0] + BORDER // 2:
             pass
         else:
-            x -= BORDER // 2
-            y -= BORDER // 2
+            x -= BORDER // 2 + 1
+            y -= BORDER // 2 + 1
             print("clicked at img 1: ", (x, y))
             draw_circle(event.x, event.y, color=COLOR)
             xy_img1.append((x, y))
@@ -44,12 +46,12 @@ def add_point(event):
 
     else:
         # 轮到图片 2
-        if event.x < img_1.size[0] + BORDER // 2 or event.x > img_1.size[0] + img_2.size[0] + BORDER // 2 \
-                or event.y < BORDER // 2 or event.y > img_1.size[0] + BORDER // 2:
+        if event.x <= img_1.size[0] + BORDER or event.x >= img_1.size[0] + img_2.size[0] + BORDER \
+                or event.y <= BORDER // 2 or event.y >= img_1.size[0] + BORDER // 2:
             pass
         else:
-            x -= img_1.size[0] + BORDER // 2
-            y -= BORDER // 2
+            x -= img_1.size[0] + BORDER + 1
+            y -= BORDER // 2 + 1
             print("clicked at img 2: ", (x, y))
             draw_circle(event.x, event.y, color=COLOR)
             img1_to_img2[xy_img1[-1]] = (x, y)
@@ -87,9 +89,11 @@ def draw_circle(x, y, color="blue"):
 
 
 def save():
-    with open('dict.txt', 'w') as f:
+    with open('project3_morph/dict.txt', 'w') as f:
         f.write(str(img1_to_img2))
     print('dict saved')
+    img_1.save('project3_morph/a.png', 'png')
+    img_2.save('project3_morph/b.png', 'png')
 
 
 if __name__ == '__main__':
@@ -98,13 +102,13 @@ if __name__ == '__main__':
 
     window = tk.Tk(className="Click Correspondences")
 
-    canvas = tk.Canvas(window, width=img_1.size[0] + img_2.size[0] + BORDER, height=img_1.size[1] + BORDER)
+    canvas = tk.Canvas(window, width=img_1.size[0] + img_2.size[0] + BORDER * 3 // 2, height=img_1.size[1] + BORDER)
     canvas.pack()
     image_tk_1 = ImageTk.PhotoImage(img_1)
     image_tk_2 = ImageTk.PhotoImage(img_2)
 
     canvas.create_image(BORDER // 2, BORDER // 2, anchor='nw', image=image_tk_1)
-    canvas.create_image(img_1.size[0] + BORDER // 2, BORDER // 2, anchor='nw', image=image_tk_2)
+    canvas.create_image(img_1.size[0] + BORDER, BORDER // 2, anchor='nw', image=image_tk_2)
 
     canvas.bind("<Button-1>", add_point)
     canvas.bind("<Button-2>", del_point)
