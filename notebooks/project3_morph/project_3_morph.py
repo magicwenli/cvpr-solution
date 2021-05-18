@@ -7,7 +7,7 @@
 
 import numpy as np
 from scipy.spatial import Delaunay
-
+from matplotlib import pyplot as plt
 
 class Morph:
 
@@ -60,6 +60,10 @@ class Morph:
     def get_matrix_T(self, tri_cords):
         return np.vstack((tri_cords[:, 0], tri_cords[:, 1], np.asarray([1, 1, 1])))
 
+    def tri_plot(self):
+        plt.triplot(self.tmp_points[:, 0], self.tmp_points[:, 1], self.tmp_dela_tri.simplices)
+
+
     def morph1d(self, target='src'):
         if target == 'src':
             dst_img = self.src_img
@@ -70,8 +74,6 @@ class Morph:
         else:
             raise NameError
 
-        src_tri = self.tmp_dela_tri
-        src_points = self.tmp_points
         new_img=np.zeros(dst_img.shape)
         # plt.triplot(src_points[:, 0], src_points[:, 1], src_tri.simplices)
         # plt.imshow(dst_img)
@@ -80,12 +82,12 @@ class Morph:
         for x, col in enumerate(new_img):
             for y, val in enumerate(col):
                 # tri_id 该坐标所在的Delaunay三角形的序号
-                src_tri_id = src_tri.find_simplex((x, y))
+                src_tri_id = self.tmp_dela_tri.find_simplex((x, y))
                 if src_tri_id == -1:
                     new_img[x, y] = 255
                 else:
                     # tri_cords 该坐标所在的三角形的顶点坐标
-                    src_tri_cords = src_points[src_tri.simplices[src_tri_id]]
+                    src_tri_cords = self.tmp_points[self.tmp_dela_tri.simplices[src_tri_id]]
 
                     # 取得对应三角形顶点坐标
                     dst_tri_cords = np.asarray([src2dst[tuple(x)] for x in src_tri_cords])
@@ -94,8 +96,8 @@ class Morph:
                     T_src = self.get_matrix_T(src_tri_cords)
                     T_dst = self.get_matrix_T(dst_tri_cords)
 
-                    X = np.asarray([x, y, 1])
-                    para = np.linalg.inv(T_src).dot(X.T)
+                    X = np.asarray([[x], [y], [1]])
+                    para = np.linalg.inv(T_src).dot(X)
                     new_cord = T_dst.dot(para).T
                     new_cord = np.round(new_cord).astype(int)
 
