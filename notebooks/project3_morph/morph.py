@@ -6,9 +6,7 @@
 # @Description  :
 
 import ast
-
 import cv2
-
 from project_3_morph import Morph
 
 
@@ -22,10 +20,10 @@ def avg_img(c_1, c_2, dict_points, i):
 
 if __name__ == '__main__':
 
-    img_1 = cv2.imread('project3_morph/a.png', 1)
-    img_2 = cv2.imread('project3_morph/b.png', 1)
+    img_1 = cv2.imread('a.png', 1)
+    img_2 = cv2.imread('b.png', 1)
 
-    points_dict = 'project3_morph/dict.txt'
+    points_dict = 'dict.txt'
     with open(points_dict, 'r') as f:
         dict_points = ast.literal_eval(f.read())
 
@@ -37,4 +35,4 @@ if __name__ == '__main__':
         cg = avg_img(g_1, g_2, dict_points, i)
         cr = avg_img(r_1, r_2, dict_points, i)
         c = cv2.merge([cb, cg, cr])
-        cv2.imwrite('project3_morph/avg_{:.2f}.png'.format(i / 10), c)
+        cv2.imwrite('avg_{:.2f}.png'.format(i / 10), c)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time         : 2021/5/18 12:34
 # @Author       : magicwenli
-# @FileName     : project_3_morph_click_correspondences.py
+# @FileName     : click_correspondences.py
 # @GitHub       : https://github.com/magicwenli
 # @Description  : "<Button-1>", add_point
 #                 "<Button-2>", del_point
