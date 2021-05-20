@@ -11,10 +11,11 @@ import random
 import tkinter as tk
 
 from PIL import Image, ImageTk
+import json
 
-img_1 = Image.open('../pics/Gollum_1.png')
+img_1 = Image.open('../../pics/Gollum_1.png')
 img_1 = img_1.resize((200, 200), Image.ANTIALIAS)
-img_2 = Image.open('../pics/Gollum_2.png')
+img_2 = Image.open('../../pics/Gollum_2.png')
 img_2 = img_2.resize((200, 200), Image.ANTIALIAS)
 
 BORDER = 50
@@ -89,11 +90,11 @@ def draw_circle(x, y, color="blue"):
 
 
 def save():
-    with open('project3_morph/dict.txt', 'w') as f:
+    with open('dict.txt', 'w') as f:
         f.write(str(img1_to_img2))
     print('dict saved')
-    img_1.save('project3_morph/a.png', 'png')
-    img_2.save('project3_morph/b.png', 'png')
+    img_1.save('a.png', 'png')
+    img_2.save('b.png', 'png')
 
 
 if __name__ == '__main__':

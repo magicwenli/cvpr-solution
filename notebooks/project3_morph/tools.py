@@ -1,5 +1,29 @@
 import numpy as np
 import scipy.spatial as spatial
+import cv2
+
+def bilinear_interpolate(img, coords):
+    """ Interpolates over every image channel
+    http://en.wikipedia.org/wiki/Bilinear_interpolation
+    :param img: max 3 channel image
+    :param coords: 2 x _m_ array. 1st row = xcoords, 2nd row = ycoords
+    :returns: array of interpolated pixels with same shape as coords
+    """
+    int_coords = np.int32(coords)
+    x0, y0 = int_coords
+    dx, dy = coords - int_coords
+
+    # 4 Neighour pixels
+    q11 = img[y0, x0]
+    q21 = img[y0, x0 + 1]
+    q12 = img[y0 + 1, x0]
+    q22 = img[y0 + 1, x0 + 1]
+
+    btm = q21.T * dx + q11.T * (1 - dx)
+    top = q22.T * dx + q12.T * (1 - dx)
+    inter_pixel = top * dy + btm * (1 - dy)
+
+    return inter_pixel.T
 
 
 def grid_coordinates(points):
@@ -73,7 +97,6 @@ def warp_image(src_img, src_points, dest_points, dest_shape, dtype=np.uint8):
 
 
 def weighted_average(img1, img2, percent=0.5):
-    import cv2
     if percent <= 0:
         return img2
     elif percent >= 1:
@@ -103,8 +126,8 @@ def test_local():
     from matplotlib import pyplot as plt
 
     # Load source image
-    base_path = 'a.png'
-    src_path = 'b.png'
+    base_path = 'Gollum/a.png'
+    src_path = 'Gollum/b.png'
     src_img = cv2.imread(src_path)
 
     # Define control points for warps
@@ -120,7 +143,7 @@ def test_local():
     base_img = cv2.imread(base_path)
     base_points = np.asarray(vals)
 
-    size = (200, 200)
+    size = (256, 256)
     # src_img, src_points = aligner.resize_align(src_img, src_points, size)
     # base_img, base_points = aligner.resize_align(base_img, base_points, size)
     result_points = weighted_average_points(src_points, base_points, 0.2)
@@ -129,8 +152,7 @@ def test_local():
     dst_img1 = warp_image(src_img, src_points, result_points, size)
     dst_img2 = warp_image(base_img, base_points, result_points, size)
 
-
-    ave = weighted_average(dst_img1, dst_img2, 0.6)
+    ave = weighted_average(dst_img1, dst_img2, 0.5)
     # mask = blender.mask_from_points(size, result_points)
     # blended_img = blender.poisson_blend(dst_img1, dst_img2, mask)
 
