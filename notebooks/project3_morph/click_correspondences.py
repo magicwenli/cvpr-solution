@@ -13,10 +13,10 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import json
 
-img_1 = Image.open('../../pics/Gollum_1.png')
-img_1 = img_1.resize((200, 200), Image.ANTIALIAS)
-img_2 = Image.open('../../pics/Gollum_2.png')
-img_2 = img_2.resize((200, 200), Image.ANTIALIAS)
+img_1 = Image.open('../../pics/dog_1.png')
+# img_1 = img_1.resize((200, 200), Image.ANTIALIAS)
+img_2 = Image.open('../../pics/dog_2.png')
+# img_2 = img_2.resize((200, 200), Image.ANTIALIAS)
 
 BORDER = 50
 COLOR = 'blue'
