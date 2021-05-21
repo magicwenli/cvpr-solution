@@ -1,7 +1,6 @@
 *.png
 dict.txt
 dict*.txt
-*.gif
 *checkpoints/
 .idea/
 
