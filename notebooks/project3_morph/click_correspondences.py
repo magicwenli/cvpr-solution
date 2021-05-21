@@ -13,20 +13,6 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import json
 
-
-img_1 = Image.open('../../pics/wolf.png')
-img_1 = img_1.resize((300, 300), Image.ANTIALIAS)
-img_2 = Image.open('../../pics/leopard.png')
-img_2 = img_2.resize((300, 300), Image.ANTIALIAS)
-
-BORDER = 50
-COLOR = 'blue'
-points_ids = []  # 存放圆圈id
-next_img = 0  # 0:下次需要点击图片1， 1: 下次需要点击图片2
-img1_to_img2 = dict()
-xy_img1 = []  # 存放图片1的坐标
-
-
 def add_point(event):
     global next_img, COLOR, img1_to_img2, xy_img1
     x = event.x
@@ -96,6 +82,19 @@ def save():
     print('dict saved')
     img_1.save('tmp/a.png', 'png')
     img_2.save('tmp/b.png', 'png')
+
+
+img_1 = Image.open('../../pics/wolf.png')
+img_1 = img_1.resize((300, 300), Image.ANTIALIAS)
+img_2 = Image.open('../../pics/leopard.png')
+img_2 = img_2.resize((300, 300), Image.ANTIALIAS)
+
+BORDER = 50
+COLOR = 'blue'
+points_ids = []  # 存放圆圈id
+next_img = 0  # 0:下次需要点击图片1， 1: 下次需要点击图片2
+img1_to_img2 = dict()
+xy_img1 = []  # 存放图片1的坐标
 
 
 if __name__ == '__main__':
