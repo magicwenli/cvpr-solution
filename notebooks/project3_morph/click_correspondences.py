@@ -13,10 +13,11 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import json
 
-img_1 = Image.open('../../pics/dog_1.png')
-# img_1 = img_1.resize((200, 200), Image.ANTIALIAS)
-img_2 = Image.open('../../pics/dog_2.png')
-# img_2 = img_2.resize((200, 200), Image.ANTIALIAS)
+
+img_1 = Image.open('../../pics/wolf.png')
+img_1 = img_1.resize((300, 300), Image.ANTIALIAS)
+img_2 = Image.open('../../pics/leopard.png')
+img_2 = img_2.resize((300, 300), Image.ANTIALIAS)
 
 BORDER = 50
 COLOR = 'blue'
@@ -90,11 +91,11 @@ def draw_circle(x, y, color="blue"):
 
 
 def save():
-    with open('dict.txt', 'w') as f:
+    with open('tmp/dict.txt', 'w') as f:
         f.write(str(img1_to_img2))
     print('dict saved')
-    img_1.save('a.png', 'png')
-    img_2.save('b.png', 'png')
+    img_1.save('tmp/a.png', 'png')
+    img_2.save('tmp/b.png', 'png')
 
 
 if __name__ == '__main__':

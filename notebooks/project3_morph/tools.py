@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+# @Time         : 2021/5/21 08:08
+# @Author       : magicwenli
+# @FileName     : tools.py
+# @GitHub       : https://github.com/magicwenli
+# @Description  : tools for morphing,
+#                 credits to https://github.com/alyssaq/face_morpher
+
 import numpy as np
 import scipy.spatial as spatial
 import cv2
