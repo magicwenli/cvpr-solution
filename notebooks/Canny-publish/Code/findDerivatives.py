@@ -38,9 +38,9 @@ def findDerivatives(I_gray):
     Magx = signal.convolve2d(I_gray, np.rot90(Gx, 2), 'same')
     Magy = signal.convolve2d(I_gray, np.rot90(Gy, 2), 'same')
 
-    Mag = signal.convolve2d(Magx, np.rot90(dy, 2), 'same')
+    Mag = np.sqrt(Magx*Magx+Magy*Magy)
 
-    Ori = np.arctan2(Magy, Magx)/np.pi*90
+    Ori = np.arctan2(Magy, Magx)/np.pi*180
 
     return Mag, Magx, Magy, Ori
 

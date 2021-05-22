@@ -24,8 +24,6 @@ def nonMaxSup(Mag, Ori, grad_Ori):
     suppressed.fill(0)
     shape = suppressed.shape
 
-    
-
     for i in range(1, shape[0] - 1):
         for j in range(1, shape[1] - 1):
             g0 = Mag[i, j]
