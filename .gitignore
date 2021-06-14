@@ -1,4 +1,5 @@
 *.png
+img*.jpg
 dict.txt
 dict*.txt
 *checkpoints/
