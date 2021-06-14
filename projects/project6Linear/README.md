@@ -1,6 +1,6 @@
 # Proj6 Linear Regression & Perceptron
 
-##Linear Regression 
+## Linear Regression
 
 ### 解析解
 
@@ -23,7 +23,7 @@
 解得
 
 <img src="https://render.githubusercontent.com/render/math?math=%5Cmathbf%7Bw%7D%20%3D%20(%5Cmathbf%7BH%7D%5E%5Cintercal%20%5Ccdot%20%5Cmathbf%7BH%7D%20)%5Ccdot%20%5Cmathbf%7BH%7D%5E%5Cintercal%20%5Ccdot%20%5Cmathbf%7BY%7D%0A">
- 
+
 
 `python`代码：
 
@@ -168,33 +168,21 @@ def stochastic_gradient_descent(age, feature):
 
 使用`b = np.random.randn(1, 1)`生成一个1维的随机偏置。
 
-2) 填充 `predict` 函数，这个函数返回两个值，一个是 `preds`，这个记录 着线性感知机在进行` sign `函数运算之前的实数值，另外一个是 `y_hat` 记 录着进行 `sign `函数运算之后的结果
-$$
-\mathcal{preds}_i = \mathbf{w}\cdot\mathbf{X_i} + b\ ,\quad i\in[0,\text{num_sample})
-$$
+2. 填充 `predict` 函数，这个函数返回两个值，一个是 `preds`，这个记录 着线性感知机在进行` sign `函数运算之前的实数值，另外一个是 `y_hat` 记 录着进行 `sign `函数运算之后的结果
 
-$$
-\mathbf{y\_hat} = sign(\mathbf{preds})
-$$
+<img src="https://render.githubusercontent.com/render/math?math=%5Cmathrm%7Bpreds%7D_i%20%3D%20%5Cmathbf%7Bw%7D%5Ccdot%5Cmathbf%7BX_i%7D%20%2B%20b%5C%20%2C%5Cquad%20i%5Cin%5B0%2C%5Ctext%7Bnum_sample%7D)">
+
+<img src="https://render.githubusercontent.com/render/math?math=%5Cmathbf%7By%5C_hat%7D%20%3D%20sign(%5Cmathbf%7Bpreds%7D)">
 
  3)填充 `update `函数，这个函数实现的是梯度下降法，轮询一次所有的样本，更新参数。
 
 每次`update`需要根据所有分类不正确的结果修正。
 
-当$y_i\cdot y\_hat_i\le 0$时，说明分类不正确，此时需要
-$$
-\mathbf{w} = \mathbf{w} - lr \cdot y_i \cdot \mathbf{X}_i
-$$
+当<img src="https://render.githubusercontent.com/render/math?math=y_i%5Ccdot%20y%5C_hat_i%5Cle%200">时，说明分类不正确，此时需要
 
-$$
-b=b- lr\cdot y_i
-$$
+<img src="https://render.githubusercontent.com/render/math?math=%5Cmathbf%7Bw%7D%20%3D%20%5Cmathbf%7Bw%7D%20-%20lr%20%5Ccdot%20y_i%20%5Ccdot%20%5Cmathbf%7BX%7D_i%0A">
 
-#### 结果
-
-![截屏2021-05-31 21.23.29](assets/img/proj6_%E8%AE%A1%E7%AE%97%E6%9C%BA82_%E6%9D%A8%E9%9B%AA%E5%BF%B5/%E6%88%AA%E5%B1%8F2021-05-31%2021.23.29.png)
-
-
+<img src="https://render.githubusercontent.com/render/math?math=b%3Db-%20lr%5Ccdot%20y_i">
 
 `python`代码如下：
 
