@@ -1,4 +1,5 @@
 *.png
+img*.jpg
 dict.txt
 dict*.txt
 *checkpoints/
@@ -138,3 +139,5 @@ dmypy.json
 .vscode/settings.json
 notebooks/project6Linear/gd.txt
 notebooks/project6Linear/sgd.txt
+
+appa-real-release/
