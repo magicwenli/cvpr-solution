@@ -12,10 +12,10 @@ def ResizeImage(filein, fileout, width=800, height=800, type='jpeg'):
 
 
 if __name__ == '__main__':
-    width = 800
-    height = 800
+    width = 1097
+    height = 500
 
     images = glob.glob('../imgs' + os.sep + '**.jpg')
     for img in images:
-        file_out=os.path.splitext(img)[0] + '_resize.jpg'
-        ResizeImage(img,file_out)
+        file_out = os.path.splitext(img)[0] + '_resize.jpg'
+        ResizeImage(img, file_out, width, height)

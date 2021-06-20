@@ -11,7 +11,6 @@ def Checkerboard(N,n):
     b=np.pad(a,int((N**2)/2-n),'wrap').reshape((N,N))
     return (b+b.T==1).astype(int)
 
-
 # 3+6n<2np
 # n: 图像个数，20
 # p: 点的个数，
